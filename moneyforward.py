@@ -3,13 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
 import datetime
+import os
 from time import sleep
 import matplotlib.pyplot as plt
 import chromedriver_binary
 from dotenv import load_dotenv
 
-# .envファイルの内容を読み込む
+# .envファイルの内容を読み込む 変数は環境ファイルへ
 load_dotenv()
+download_path = os.environ['download_path']
+USER = os.environ['USERID_MF']
+PASS = os.environ['PASS_MF']
 
 option = Options()                          # オプションを用意
 option.add_argument('--incognito')          # シークレットモードの設定を付与
@@ -19,7 +23,6 @@ option.add_argument('--incognito')          # シークレットモードの設�
 option.add_experimental_option("prefs", {"download.default_directory": download_path})
 
 browser = webdriver.Chrome(options=option)   # Chromeを準備(optionでシークレットモードにしている）
-
 
 ### login
 url = "https://id.moneyforward.com/sign_in/email"

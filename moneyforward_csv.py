@@ -7,9 +7,7 @@ from dotenv import load_dotenv
 
 # .envファイルの内容を読み込む
 load_dotenv()
-
-download_path = '/Users/hideki/Documents/GitHub/moneyforward_scr/tmp'
-
+download_path = os.environ['download_path']
 
 # ディレクトリ変更
 os.chdir(download_path)
