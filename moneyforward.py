@@ -6,8 +6,10 @@ import datetime
 import os
 from time import sleep
 import matplotlib.pyplot as plt
-import chromedriver_binary
 from dotenv import load_dotenv
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 # .envファイルの内容を読み込む 変数は環境ファイルへ
 load_dotenv()
@@ -22,7 +24,9 @@ option.add_argument('--incognito')          # シークレットモードの設�
 
 option.add_experimental_option("prefs", {"download.default_directory": download_path})
 
-browser = webdriver.Chrome(options=option)   # Chromeを準備(optionでシークレットモードにしている）
+# Chromeを準備(optionでシークレットモードにしている）
+browser = webdriver.Chrome(ChromeDriverManager().install(),)
+
 
 ### login
 url = "https://id.moneyforward.com/sign_in/email"
@@ -63,7 +67,7 @@ frm.submit()
 sleep(10)
 
 #　家計簿アクセスしてダウンロード
-link = browser.find_element(By.LINK_TEXT, "家計")
+link = browser.find_element(By.LINK_TEXT, "家計簿")
 link.click()
 
 sleep(5)
@@ -86,7 +90,7 @@ csvdl()
 sleep(2)
 
 #p2 -
-for i in range(2):
+for i in range(12):
     pagelink()
     sleep(5)
     csvdl()
